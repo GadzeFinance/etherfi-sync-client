@@ -20,4 +20,4 @@ Prepare a .env that suits your environment, you will need to configure:
 
 Build the image with `docker build . -t etherfi-sync-client:0.0.1` or `docker build . -t etherfi-sync-client:latest`.
 
-To run the image as a container, use `docker run --env-file .env etherfi-sync-client:0.0.2` or `docker run --env-file .env etherfi-sync-client:latest`.
+To run the image as a container, use `docker run --env-file .env etherfi-sync-client:0.0.1` or `docker run --env-file .env etherfi-sync-client:latest`.
