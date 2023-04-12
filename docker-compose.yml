@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  etherfi-syncing-client:
+    build: .
+    volumes:
+      - ./storage:/_storage_
+    environment:
+      ETHERFI_SC_IPFS_GATEWAY: "https://ether-fi-goerli.infura-ipfs.io/ipfs"
+      ETHERFI_SC_GRAPH_URL: "https://api.studio.thegraph.com/query/41778/etherfi/0.0.69"
+      ETHERFI_SC_OUTPUT_LOCATION: "/_storage_/output"
+      ETHERFI_SC_BIDDER: "0x39EAa30aE67266658c3fD9FA80cD913d96F2cFcD"
+      ETHERFI_SC_PRIVATE_KEYS_FILE_LOCATION: "/_storage_/input/privateEtherfiKeystore-1681395800316.json"
+      ETHERFI_SC_PASSWORD: "Password123!"
+    restart: on-failure

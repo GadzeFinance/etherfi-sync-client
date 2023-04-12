@@ -12,6 +12,7 @@ export const retrieveBidsFromSubgraph = async (GRAPH_URL, BIDDER) => {
             id
             phase
             ipfsHashForEncryptedValidatorKey
+            validatorPubKey
         }
       }
     }

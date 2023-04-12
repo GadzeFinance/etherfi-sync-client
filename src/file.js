@@ -1,38 +1,32 @@
 import fs from 'fs'
 
-export const createFSBidOutput = (location, data, identifier) => {
+export const createFSBidOutput = (location, data, identifier, validatorPubKey) => {
     const locationWithBidIdentifier = `${location}/${identifier}`
     createDirSafe(location)
     createDirSafe(locationWithBidIdentifier)
-    createWalletDir(locationWithBidIdentifier)
-    createKeysDir(locationWithBidIdentifier)
-    createFile(`${locationWithBidIdentifier}/wallet/wallet.txt`, data.validatorKeyPassword)
-    createFile(`${locationWithBidIdentifier}//keys/keys.json`, data.validatorKeyFile)
+    createFile(`${locationWithBidIdentifier}/pw.txt`, data.validatorKeyPassword)
+    createFile(`${locationWithBidIdentifier}/pubkey.txt`, validatorPubKey)
+    createFile(`${locationWithBidIdentifier}/${data.keystoreName}`, JSON.stringify(data.validatorKeyFile))
+    
+    // some assumptions are being made on the directories being used below, could be extracted to ENV variables
+    const bashHeader = '#!/bin/bash -xe \n'
+    const echoLine = `echo "Adding keystore to prysm for validator with pubkey:${validatorPubKey.slice(0, 10)} ..." \n`
+    const changeDirectoryLine = 'cd /home/ec2-user/ethereum/consensus \n'
+    const prysmCommandLine = `sudo ./prysm.sh validator accounts import --goerli --wallet-dir=/home/ec2-user/ethereum/consensus --keys-dir=/home/ec2-user/ethereum/consensus/etherfi-sync-client/storage/output`
+
+    createFile(`${locationWithBidIdentifier}/add.sh`, `${bashHeader} ${echoLine} ${changeDirectoryLine} ${prysmCommandLine}/${identifier}/${data.keystoreName}`)
 }
 
 const createDirSafe = (location) => {
     if (fs.existsSync(location)) {
-        return;
+        return
     }
     fs.mkdirSync(`${location}`)
 }
 
-const createWalletDir = (location) => {
-    const directoryToCreate = `${location}/wallet`
-    if (fs.existsSync(directoryToCreate)) {
-        return;
-    }
-    fs.mkdirSync(directoryToCreate)
-}
-
-const createKeysDir = (location) => {
-    const directoryToCreate = `${location}/keys`
-    if (fs.existsSync(directoryToCreate)) {
-        return;
-    }
-    fs.mkdirSync(directoryToCreate)
-}
-
 const createFile = (location, content) => {
+    if (fs.existsSync(location)) {
+        return
+    }
     fs.writeFileSync(location, content)
 }
