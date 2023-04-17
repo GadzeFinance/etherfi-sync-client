@@ -1,0 +1,7 @@
+storage
+backup
+.env.example
+node_modules
+.nvmrc
+docker-compose.yml
+Dockerfile
