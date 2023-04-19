@@ -66,7 +66,7 @@ export const decryptValidatorKeyInfo = (file, keypairForIndex) => {
   const validatorKeyString = decrypt(file["encryptedValidatorKey"], nodeOperatorSharedSecret.toArrayLike(Buffer, "be", 32));
   const validatorKeyPassword = decrypt(file["encryptedPassword"],secretAsArray);
   const keystoreName = decrypt(file["encryptedKeystoreName"],secretAsArray);
-  return { validatorKeyFile: validatorKeyString, validatorKeyPassword, keystoreName }
+  return { validatorKeyFile: JSON.parse(validatorKeyString), validatorKeyPassword, keystoreName }
 }
 
 export const getKeyPairByPubKeyIndex = (pubkeyIndexString, privateKeys, publicKeys) => {
