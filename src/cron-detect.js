@@ -26,11 +26,10 @@ async function run() {
     const { validator, pubKeyIndex } = bid
     const { ipfsHashForEncryptedValidatorKey, validatorPubKey } = validator
     const file = await fetchFromIpfs(ipfsHashForEncryptedValidatorKey)
-    const fileParsed = JSON.parse(file)
     const validatorKey = decryptKeyPairJSON(privateKeys, PASSWORD)
     const { pubKeyArray, privKeyArray } = validatorKey
     const keypairForIndex = getKeyPairByPubKeyIndex(pubKeyIndex, privKeyArray, pubKeyArray)
-    const data = decryptValidatorKeyInfo(fileParsed, keypairForIndex)
+    const data = decryptValidatorKeyInfo(file, keypairForIndex)
     console.log(`creating ${data.keystoreName} for bid:${bid.id}`)
     createFSBidOutput(OUTPUT_LOCATION, data, bid.id, validatorPubKey)
     console.log(`< end processing bid with id:${bid.id}`)
