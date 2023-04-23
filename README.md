@@ -8,8 +8,8 @@ To get setup, run the following:
 - `cp .env.example .env` to get a working .env setup for testing
 
 You should now be ready to run the program:
-- `npm start`
-- `source .env && yarn start`
+- `npm start` or
+- `source .env && yarn start` or
 - `source .env && node index.js`
 
 

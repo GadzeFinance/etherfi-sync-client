@@ -23,7 +23,7 @@ export const retrieveBidsFromSubgraph = async (GRAPH_URL, BIDDER) => {
         const { bids: result } = await request(GRAPH_URL, bidsQuery)
         bids = result
     } catch (error) {
-        console.error('an error occurred querying bids')
+        console.error(`an error occurred querying bids: ${error.message}`)
     }
     return bids
 }
