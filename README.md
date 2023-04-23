@@ -8,7 +8,9 @@ To get setup, run the following:
 - `cp .env.example .env` to get a working .env setup for testing
 
 You should now be ready to run the program:
-- `yarn start` or `node index.js`
+- `npm start`
+- `source .env && yarn start`
+- `source .env && node index.js`
 
 
 ### Docker usage

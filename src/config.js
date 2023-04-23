@@ -18,6 +18,8 @@ export const getConfig = () => {
 
     const valuesAsArray = Object.values(env)
 
+    console.log(valuesAsArray)
+
     if (!valuesAsArray.every(x => typeof x === 'string')) {
         throw Error('env did not load correctly, stopping')
     }
