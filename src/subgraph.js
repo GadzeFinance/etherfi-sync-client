@@ -4,7 +4,7 @@ export const retrieveBidsFromSubgraph = async (GRAPH_URL, BIDDER) => {
 
     const bidsQuery = gql`
     {
-      bids(where: { bidderAddress: "${BIDDER}", status: "WON", validator_not: null }) {
+      bids(where: { bidderAddress: "${BIDDER}", status: "WON", validator_not: null, validator_: { phase: VALIDATOR_REGISTERED} }) {
         id
         bidderAddress
         pubKeyIndex
