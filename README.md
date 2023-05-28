@@ -17,6 +17,8 @@ Prepare a .env that suits your environment, you will need to configure:
 - ETHERFI_SC_BIDDER, the address used in the web UI to create bids
 - ETHERFI_SC_PASSWORD, the password used when generating the keys with the desktop app
 - ETHERFI_SC_PRIVATE_KEYS_FILE_LOCATION, the location of the private keys generated with the desktop app
+- ETHERFI_SC_CONSENSUS_LOCATION, path to the `consensus/validator_keys` directory
+- ETHERFI_SC_CLIENT_LOCATION, full path to the `consensus/` folder
 
 Build the image with `docker build . -t etherfi-sync-client:0.0.1` or `docker build . -t etherfi-sync-client:latest`.
 
@@ -37,6 +39,8 @@ Ensure environment is correct for variables:
 - ETHERFI_SC_BIDDER (most likely to change)
 - ETHERFI_SC_PRIVATE_KEYS_FILE_LOCATION (most likely to change)
 - ETHERFI_SC_PASSWORD (most likely to change)
+- CONSENSUS_FOLDER_LOCATION (will change)
+- ETHERFI_SC_CLIENT_LOCATION (will change)
 
 Run locally to iterate on code with `docker compose up --build` which will rebuild everything each time.
 
